@@ -30,24 +30,24 @@ export default function QuizApp() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 flex flex-col items-center justify-center">
-      {showResult ? (
-        <ResultCard 
-          result={calculateResult(answers)} 
-          onReset={resetQuiz} 
+    <div className="quiz-container">
+    {showResult ? (
+      <ResultCard 
+        result={calculateResult(answers)} 
+        onReset={resetQuiz} 
+      />
+    ) : (
+      <div className="quiz-card">
+        <ProgressBar 
+          current={currentQuestion} 
+          total={questions.length} 
         />
-      ) : (
-        <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
-          <ProgressBar 
-            current={currentQuestion} 
-            total={questions.length} 
-          />
-          <QuestionCard
-            question={questions[currentQuestion]}
-            onAnswer={handleAnswer}
-          />
-        </div>
-      )}
-    </div>
-  );
+        <QuestionCard
+          question={questions[currentQuestion]}
+          onAnswer={handleAnswer}
+        />
+      </div>
+    )}
+  </div>
+);
 }

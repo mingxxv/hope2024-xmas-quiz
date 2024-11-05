@@ -2,15 +2,113 @@
 @tailwind components;
 @tailwind utilities;
 
-
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --card-bg: #1a1a1a;
+  --button-bg: #262626;
+  --button-hover: #333333;
+  --border-color: #404040;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --muted-text: #a3a3a3;
+}
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Layout */
+.quiz-container {
+  @apply min-h-screen p-4 flex flex-col items-center justify-center;
+}
+
+.quiz-card {
+  @apply w-full max-w-md rounded-lg shadow-xl p-6;
+  background-color: var(--card-bg);
+}
+
+/* Progress Bar */
+.progress-container {
+  @apply mb-6;
+}
+
+.progress-header {
+  @apply flex justify-between items-center mb-4;
+}
+
+.progress-question-number {
+  @apply text-xl font-bold;
+}
+
+.progress-count {
+  color: var(--muted-text);
+}
+
+.progress-bar-bg {
+  @apply h-2 rounded-full;
+  background-color: var(--button-bg);
+}
+
+.progress-bar-fill {
+  @apply h-2 rounded-full transition-all duration-300;
+  background-color: var(--accent);
+}
+
+/* Question */
+.question-text {
+  @apply text-lg font-medium mb-4;
+}
+
+.options-container {
+  @apply space-y-3;
+}
+
+/* Option Button */
+.option-button {
+  @apply w-full rounded-lg p-4 text-left flex items-center justify-between transition-colors;
+  background-color: var(--button-bg);
+  border: 2px solid var(--border-color);
+}
+
+.option-button:hover {
+  background-color: var(--button-hover);
+}
+
+.option-button .icon {
+  color: var(--muted-text);
+}
+
+.option-button:hover .icon {
+  color: var(--foreground);
+}
+
+/* Result Card */
+.result-title {
+  @apply text-2xl font-bold text-center mb-4;
+}
+
+.result-content {
+  @apply text-center text-lg mb-6;
+}
+
+.result-type {
+  @apply block mt-2 text-xl font-bold;
+  color: var(--accent);
+}
+
+.result-description {
+  @apply block mt-4;
+  color: var(--muted-text);
+}
+
+.reset-button {
+  @apply w-full font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2;
+  background-color: var(--accent);
+}
+
+.reset-button:hover {
+  background-color: var(--accent-hover);
 }
