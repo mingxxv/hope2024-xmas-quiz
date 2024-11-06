@@ -112,3 +112,44 @@ body {
 .reset-button:hover {
   background-color: var(--accent-hover);
 }
+
+.score-item {
+  @apply mb-6;
+}
+
+.score-label {
+  @apply block text-sm mb-2 font-medium;
+}
+
+.score-bar-container {
+  @apply h-4 bg-gray-700 rounded-full relative;
+}
+
+.score-bar {
+  @apply h-full rounded-full transition-all duration-500;
+  background-color: var(--accent);
+}
+
+.score-value {
+  @apply absolute right-2 top-1/2 -translate-y-1/2 text-xs font-bold;
+}
+
+.result-type {
+  @apply text-4xl font-bold my-2;
+  color: var(--accent);
+}
+
+.result-subtitle {
+  @apply text-xl block mt-2;
+  color: var(--muted-text);
+}
+
+.view-log-button {
+  background-color: var(--button-bg);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+
+.view-log-button:hover {
+  background-color: var(--button-hover);
+}

@@ -1,6 +1,7 @@
+// app/page.jsx
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ProgressBar } from './components/ProgressBar';
 import { QuestionCard } from './components/QuestionCard';
 import { ResultCard } from './components/ResultCard';
@@ -11,10 +12,20 @@ export default function QuizApp() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [showResult, setShowResult] = useState(false);
+  const [questionLog, setQuestionLog] = useState([]);
 
-  const handleAnswer = (score) => {
-    const newAnswers = [...answers, score];
+  const handleAnswer = (option) => {
+    // Add the score to answers array
+    const newAnswers = [...answers, option.score];
     setAnswers(newAnswers);
+
+    // Log the question and selected answer
+    const newLog = {
+      question: questions[currentQuestion].text,
+      selectedAnswer: option.text,
+      score: option.score
+    };
+    setQuestionLog([...questionLog, newLog]);
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -27,27 +38,29 @@ export default function QuizApp() {
     setCurrentQuestion(0);
     setAnswers([]);
     setShowResult(false);
+    setQuestionLog([]);
   };
 
   return (
     <div className="quiz-container">
-    {showResult ? (
-      <ResultCard 
-        result={calculateResult(answers)} 
-        onReset={resetQuiz} 
-      />
-    ) : (
-      <div className="quiz-card">
-        <ProgressBar 
-          current={currentQuestion} 
-          total={questions.length} 
+      {showResult ? (
+        <ResultCard 
+          result={calculateResult(answers)} 
+          onReset={resetQuiz}
+          questionLog={questionLog}
         />
-        <QuestionCard
-          question={questions[currentQuestion]}
-          onAnswer={handleAnswer}
-        />
-      </div>
-    )}
-  </div>
-);
+      ) : (
+        <div className="quiz-card">
+          <ProgressBar 
+            current={currentQuestion} 
+            total={questions.length} 
+          />
+          <QuestionCard
+            question={questions[currentQuestion]}
+            onAnswer={handleAnswer}
+          />
+        </div>
+      )}
+    </div>
+  );
 }
